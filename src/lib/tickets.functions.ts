@@ -1,4 +1,4 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, getRequest } from "@tanstack/react-start";
 
 import { classifyRequest } from "./classifier.server";
 import { classificationRequestSchema } from "./classification";
@@ -11,6 +11,11 @@ import { classificationRequestSchema } from "./classification";
 export const classifyTicket = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => classificationRequestSchema.parse(input))
   .handler(async ({ data }) => {
-    const request = getRequest();
-    return classifyRequest(data.text, request?.signal);
+    let signal: AbortSignal | undefined;
+    try {
+      signal = getRequest()?.signal;
+    } catch {
+      // No HTTP request context (e.g. called from another server function).
+    }
+    return classifyRequest(data.text, signal);
   });

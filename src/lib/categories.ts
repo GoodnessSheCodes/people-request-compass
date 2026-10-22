@@ -80,7 +80,10 @@ export const PRIMARY_CATEGORIES = categoryEntries;
 export type CategoryId = (typeof categoryEntries)[number]["id"];
 
 /** The four primary category ids: "HR" | "IT" | "FINANCE" | "OPERATIONS". */
-export const CATEGORY_IDS = categoryEntries.map((c) => c.id) as CategoryId[];
+export const CATEGORY_IDS = categoryEntries.map((c) => c.id) as [
+  CategoryId,
+  ...CategoryId[],
+];
 
 /**
  * Fallback marker for requests the classifier cannot reliably place

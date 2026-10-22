@@ -47,8 +47,8 @@ function Index() {
             The single configuration in <code className="text-foreground">src/lib/categories.ts</code>{" "}
             drives classification, validation and storage. Requests the engine cannot
             place reliably are marked{" "}
-            <Badge variant="outline">{UNCATEGORIZED_ID}</Badge> and flagged for manual
-            review rather than forced into a category.
+            <code className="text-foreground">{UNCATEGORIZED_ID}</code> and flagged for
+            manual review rather than forced into a category.
           </p>
         </header>
 

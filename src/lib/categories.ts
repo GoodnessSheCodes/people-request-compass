@@ -93,7 +93,11 @@ export const CATEGORY_IDS = categoryEntries.map((c) => c.id) as [
 export const UNCATEGORIZED_ID = "UNCLASSIFIED";
 
 /** Every value that may ever be stored in the database `category` column. */
-export const STORABLE_CATEGORY_IDS = [...CATEGORY_IDS, UNCATEGORIZED_ID];
+export type StorableCategoryId = CategoryId | typeof UNCATEGORIZED_ID;
+export const STORABLE_CATEGORY_IDS = [
+  ...CATEGORY_IDS,
+  UNCATEGORIZED_ID,
+] as [StorableCategoryId, ...StorableCategoryId[]];
 
 /** Schema for a reliable prediction: only the four primary ids, exact case. */
 export const categorySchema = z.enum(CATEGORY_IDS);

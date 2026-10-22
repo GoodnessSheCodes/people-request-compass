@@ -34,10 +34,10 @@ describe("Category configuration", () => {
     const descriptions = Object.fromEntries(
       PRIMARY_CATEGORIES.map((c) => [c.id, c.description]),
     );
-    expect(descriptions.HR).toMatch(/leave|payslip|benefit|polic/i);
-    expect(descriptions.IT).toMatch(/password|hardware|network|software/i);
-    expect(descriptions.FINANCE).toMatch(/reimburse|invoice|payment|expense/i);
-    expect(descriptions.OPERATIONS).toMatch(/supplies|maintenance|facilit|equipment/i);
+    expect(descriptions["HR"]).toMatch(/leave|payslip|benefit|polic/i);
+    expect(descriptions["IT"]).toMatch(/password|hardware|network|software/i);
+    expect(descriptions["FINANCE"]).toMatch(/reimburse|invoice|payment|expense/i);
+    expect(descriptions["OPERATIONS"]).toMatch(/supplies|maintenance|facilit|equipment/i);
   });
 });
 

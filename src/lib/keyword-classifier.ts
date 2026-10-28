@@ -26,7 +26,11 @@ import type { ClassificationResult } from "./classification";
  * stay in sync with src/lib/categories.ts when categories are added. */
 const KEYWORDS: Record<CategoryId, string[]> = {
   HR: [
-    "leave",
+    "annual leave",
+    "sick leave",
+    "days of leave",
+    "leave request",
+    "book leave",
     "payslip",
     "salary slip",
     "benefit",
@@ -90,6 +94,8 @@ const KEYWORDS: Record<CategoryId, string[]> = {
     "workstation",
     "meeting room",
     "tap",
+    "printer paper",
+    "coffee",
   ],
 };
 
@@ -118,9 +124,9 @@ export function classifyWithKeywords(text: string): ClassificationResult {
   }).sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
 
   const top = scored[0];
-  const runnerUp = scored[1] ?? { ...top, score: 0 };
+  const runnerUp = scored[1];
 
-  if (top.score === 0) {
+  if (!top || !runnerUp || top.score === 0) {
     return {
       requestText: text,
       category: UNCATEGORIZED_ID,

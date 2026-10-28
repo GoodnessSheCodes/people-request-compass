@@ -9,6 +9,7 @@ import {
   storedCategorySchema,
 } from "./categories";
 import type { ClassificationResult } from "./classification";
+import { createLovableAiGatewayRunIdFetch } from "./ai/run-id.server";
 import { classifyWithKeywords } from "./keyword-classifier";
 
 /**
@@ -83,7 +84,7 @@ async function classifyWithAi(
     model: provider.responses(CLASSIFICATION_MODEL),
     instructions: systemPrompt,
     messages: [{ role: "user", content: text }],
-    abortSignal: signal,
+    ...(signal ? { abortSignal: signal } : {}),
     maxRetries: 0,
     output: Output.object({ schema: classificationOutputSchema }),
     providerOptions: {
